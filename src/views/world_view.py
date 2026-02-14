@@ -4,10 +4,12 @@ from tiles.desert_tile import DesertTile
 from tiles.water_tile import WaterTile
 from tiles.tresor import TresorTile
 from tiles.lava import LavaTile
+from tiles.exit import ExitTile
 from views.desert_tile_view import DesertTileView
 from views.water_tile_view import WaterTileView
 from views.tresor_view import TresorTileView
 from views.lava_views import LavaTileView
+from views.exit_views import ExitTileView
 
 
 class WorldView:
@@ -19,7 +21,9 @@ class WorldView:
             DesertTile: DesertTileView(),
             WaterTile: WaterTileView(),
             TresorTile: TresorTileView(),
-            LavaTile: LavaTileView()
+            LavaTile: LavaTileView(),
+            ExitTile: ExitTileView()
+
         }
 
     def draw(self, screen, grid, player_pos):

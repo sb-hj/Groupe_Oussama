@@ -5,6 +5,7 @@ from tiles.tile import Tile
 from tiles.water_tile import WaterTile
 from tiles.tresor import TresorTile
 from tiles.lava import LavaTile
+from tiles.exit import ExitTile
 from utils import Position
 
 
@@ -23,12 +24,18 @@ class LazyGrid:
         
         # 2. Sécurité pour le point de départ
         if x == 1000 and y == 1000:
-            return DesertTile(Position(x, y)) 
-
+            return DesertTile(Position(x, y))
+        
+        if x == 1005 and y == 1005:
+            return ExitTile(Position(x, y))
+        
+        
         # 3. Génération basée sur la seed et les coordonnées
         rng = random.Random(f"{self.seed}_{x}_{y}")
         rand = rng.random()
         
+        
+
         if rand < 0.9:   
             return  DesertTile(Position(x, y))  # Majorité de tuiles désertiques
         else: 
@@ -38,7 +45,9 @@ class LazyGrid:
                 if rand < 0.95:
                     return LavaTile(Position(x,y))
                 else:
-                    return WaterTile(Position(x, y))  # Quelques tuiles d'eau
+                    return WaterTile(Position(x, y)) 
+                 
+  # Quelques tuiles d'eau
         
     def set_tile(self, x: int, y: int, tile: Tile):
         self._cache[(x, y)] = tile

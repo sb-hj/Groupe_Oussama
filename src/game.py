@@ -8,6 +8,7 @@ from utils import Position
 from listener import Listener
 from tiles.water_tile import WaterTile
 from tiles.lava import LavaTile
+from tiles.exit import ExitTile
 import pygame
 
 class GameEngine(Listener):
@@ -45,6 +46,8 @@ class GameEngine(Listener):
         if  isinstance(self.grid.get_tile(new_pos.x, new_pos.y), TresorTile):
             self.score += 1
 
+        if isinstance(self.grid.get_tile(new_pos.x, new_pos.y), ExitTile):
+            exit(1)
             
     def notify(self, event):
         """
