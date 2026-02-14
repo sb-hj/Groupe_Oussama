@@ -6,6 +6,7 @@ from tiles.colors import BLUE
 from utils import Position
 from listener import Listener
 from tiles.water_tile import WaterTile
+from tiles.lava import LavaTile
 import pygame
 
 class GameEngine(Listener):
@@ -36,7 +37,7 @@ class GameEngine(Listener):
         """
         new_pos = Position(self.player.pos.x, self.player.pos.y)
         new_pos.move(direction)
-        if not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), WaterTile):
+        if not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), WaterTile) and not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), LavaTile):
             self.player.move(direction)
             
     def notify(self, event):
