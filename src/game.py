@@ -55,7 +55,7 @@ class GameEngine(Listener):
         """
         Démarre la boucle principale du jeu en postant des événements de Tick pour mettre à jour le jeu.  
         """
-        self.running = False
+        self.running = True
         self.ev_manager.post(evmgr.InitializeEvent())
         while self.running:
             newTick = evmgr.TickEvent()
