@@ -2,9 +2,10 @@ import eventmanager as evmgr
 import game
 import view
 import controller
-
+import sound
 
 def run():
+    son = sound.Sound("asset/son/sound.mp3")
     ev_manager = evmgr.EventManager()
     gamemodel = game.GameEngine(ev_manager)
     keyboard = controller.Keyboard(ev_manager, gamemodel)
