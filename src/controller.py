@@ -55,8 +55,8 @@ class Keyboard(Listener):
 
         match event.key:
             case pygame.K_DOWN:  self.ev_manager.post(evmgr.InputEvent(Move.DOWN,None))
-            case pygame.K_LEFT:  self.ev_manager.post(evmgr.InputEvent(Move.LEFT,None))
-            case pygame.K_RIGHT: self.ev_manager.post(evmgr.InputEvent(Move.RIGHT,None))
+            case pygame.K_LEFT:  self.ev_manager.post(evmgr.InputEvent(Move.RIGHT,None))
+            case pygame.K_RIGHT: self.ev_manager.post(evmgr.InputEvent(Move.LEFT,None))
             case pygame.K_UP: self.ev_manager.post(evmgr.InputEvent(Move.UP,None))
             case pygame.QUIT: self.ev_manager.post(evmgr.QuitEvent())
             case _: pass

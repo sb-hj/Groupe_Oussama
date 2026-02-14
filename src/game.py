@@ -3,9 +3,13 @@ import eventmanager as evmgr
 from entities.player import Player
 from grid.lazy_grid import LazyGrid
 from tiles.colors import BLUE
+from tiles.colors import YELLOW
 from utils import Position
 from listener import Listener
 from tiles.water_tile import WaterTile
+from tiles.tresor import TresorTile
+from tiles.desert_tile import DesertTile
+from tiles.lava import LavaTile
 
 class GameEngine(Listener):
     """
