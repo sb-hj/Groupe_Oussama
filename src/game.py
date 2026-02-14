@@ -3,14 +3,11 @@ import eventmanager as evmgr
 from entities.player import Player
 from grid.lazy_grid import LazyGrid
 from tiles.colors import BLUE
-from tiles.colors import YELLOW
 from utils import Position
 from listener import Listener
 from tiles.water_tile import WaterTile
-from tiles.tresor import TresorTile
-from tiles.desert_tile import DesertTile
-from tiles.lava import LavaTile
-#TEST
+import pygame
+
 class GameEngine(Listener):
     """
     Cette classe est le moteur principal du jeu. 
@@ -39,7 +36,7 @@ class GameEngine(Listener):
         """
         new_pos = Position(self.player.pos.x, self.player.pos.y)
         new_pos.move(direction)
-        if not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), WaterTile) and not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), LavaTile):
+        if not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), WaterTile):
             self.player.move(direction)
             
     def notify(self, event):
@@ -59,8 +56,39 @@ class GameEngine(Listener):
         """
         Démarre la boucle principale du jeu en postant des événements de Tick pour mettre à jour le jeu.  
         """
-        self.running = True
+        pygame.init() # Assure-toi que pygame est initialisé
+        screen = pygame.display.set_mode((600, 600))
+        pygame.display.set_caption("Menu")
+        
+        font = pygame.font.Font(None, 74)
+        button_rect = pygame.Rect(300, 250, 200, 80) # Position du bouton
+        text = font.render("START", True, (0, 255, 255))
+        
+        # Phase 1 : Le Menu
+        menu_active = True
+        while menu_active:
+            screen.fill((255, 255, 51)) # Efface l'écran (fond gris foncé)
+            
+            # Dessiner le bouton et le texte
+            pygame.draw.rect(screen, (0, 128, 255), button_rect)
+            screen.blit(text, (button_rect.x + 20, button_rect.y + 10))
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return # Quitter complètement
+                
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_rect.collidepoint(event.pos):
+                        print("Le bouton a été cliqué !")
+                        menu_active = False # Sort du menu
+                        self.running = True # Lance le jeu
+
+            pygame.display.flip()
+
+        # Phase 2 : La boucle de jeu (Tick)
         self.ev_manager.post(evmgr.InitializeEvent())
         while self.running:
+            # Pense à ajouter la gestion du QUIT ici aussi
             newTick = evmgr.TickEvent()
             self.ev_manager.post(newTick)
+ 

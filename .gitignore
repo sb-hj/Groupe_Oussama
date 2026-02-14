@@ -7,3 +7,4 @@ poetry.lock
 *.o
 *.so
 build/
+venv/
