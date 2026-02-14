@@ -2,6 +2,7 @@ import random
 import eventmanager as evmgr
 from entities.player import Player
 from grid.lazy_grid import LazyGrid
+from tiles.tresor import TresorTile
 from tiles.colors import BLUE
 from utils import Position
 from listener import Listener
@@ -24,6 +25,7 @@ class GameEngine(Listener):
         self.ev_manager = ev_manager
         ev_manager.register(self)
         self.running = False
+        self.score = 0
         
         # Initialisation : Monde infini commençant à (1000, 1000)
         self.grid = LazyGrid(seed=random.randint(0, 99999))
@@ -39,6 +41,10 @@ class GameEngine(Listener):
         new_pos.move(direction)
         if not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), WaterTile) and not isinstance(self.grid.get_tile(new_pos.x, new_pos.y), LavaTile):
             self.player.move(direction)
+        
+        if  isinstance(self.grid.get_tile(new_pos.x, new_pos.y), TresorTile):
+            self.score += 1
+
             
     def notify(self, event):
         """

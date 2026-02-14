@@ -72,6 +72,14 @@ class GraphicalView(Listener):
         self.world_view.draw(self.screen, grid, player.pos)
         self.player_view.draw(self.screen)
 
+                # 1. Remplir avec une couleur de fond (pas noir)
+        font = pygame.font.SysFont("Arial", 24)
+
+        # 2. Rendre le score
+        score_text = font.render(f"Score: {self.model.score}", True, (255, 255, 255)) # Blanc
+        self.screen.blit(score_text, (10, 10))
+        
+
         pygame.display.flip()
 
     def initialize(self):
