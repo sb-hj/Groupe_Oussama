@@ -32,10 +32,10 @@ class LazyGrid:
         if rand < 0.9:   
             return  DesertTile(Position(x, y))  # Majorité de tuiles désertiques
         else: 
-            if rand < 0.9:
+            if rand < 0.92:
                 return TresorTile(Position(x, y))
             else: 
-                if rand < 0.93:
+                if rand < 0.95:
                     return LavaTile(Position(x,y))
                 else:
                     return WaterTile(Position(x, y))  # Quelques tuiles d'eau
