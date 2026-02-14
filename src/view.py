@@ -66,6 +66,7 @@ class GraphicalView(Listener):
     
     def draw(self,player,grid):
         self.screen.fill((255, 255, 255))
+        pygame.image.load("src/views/char_shielded_static_down.png")
         
         # Delegate drawing to sub-views
         self.world_view.draw(self.screen, grid, player.pos)
